@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Paradise - About</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+            color: #006064;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, #00838f, #00bcd4);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        nav {
+            background-color: #006064;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 10px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            display: block;
+        }
+        
+        nav a:hover {
+            background-color: #00838f;
+        }
+        
+        .about-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .about-section h2 {
+            color: #00838f;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .mission, .history, .values {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background: linear-gradient(to bottom, #e0f2f1, #b2dfdb);
+            border-radius: 10px;
+        }
+        
+        .mission h3, .history h3, .values h3 {
+            color: #00796b;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .values ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
+        
+        .values li {
+            margin-bottom: 10px;
+        }
+        
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .team-member {
+            background: linear-gradient(to bottom, #e0f2f1, #b2dfdb);
+            border-radius: 10px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+        }
+        
+        .member-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            background: linear-gradient(45deg, #ff9800, #ffeb3b);
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .member-icon::before {
+            content: "👤";
+            font-size: 40px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #006064;
+            color: white;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>About Pet Paradise</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pets.html">Pets</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="socials.html">Social Media</a></li>
+
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="about-section">
+            <h2>Our Story</h2>
+            <div class="about-content">
+                <div class="mission">
+                    <h3>Our Mission</h3>
+                    <p>At Pet Paradise, our mission is to enrich the lives of pets and their owners by providing exceptional products, services, and advice. We believe that every pet deserves a loving home and the highest quality care.</p>
+                </div>
+                
+                <div class="history">
+                    <h3>Our History</h3>
+                    <p>Founded in 2010 by animal lover Sarah Johnson, Pet Paradise started as a small pet grooming service. Over the years, we've expanded to become a full-service pet store, offering everything from pet adoption to premium supplies.</p>
+                </div>
+                
+                <div class="values">
+                    <h3>Our Values</h3>
+                    <ul>
+                        <li>Compassion for all animals</li>
+                        <li>Commitment to quality</li>
+                        <li>Education and support for pet owners</li>
+                        <li>Community involvement</li>
+                        <li>Ethical business practices</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2 style="text-align: center; margin-top: 30px;">Meet Our Team</h2>
+            <div class="team">
+                <div class="team-member">
+                    <div class="member-icon"></div>
+                    <h4>Raj</h4>
+                    <p>Founder & CEO</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-icon"></div>
+                    <h4>Avani</h4>
+                    <p>Head Veterinarian</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-icon"></div>
+                    <h4>Mansi</h4>
+                    <p>Pet Care Specialist</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-icon"></div>
+                    <h4>Kartik</h4>
+                    <p>Grooming Expert</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>&copy; 2023 Pet Paradise. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

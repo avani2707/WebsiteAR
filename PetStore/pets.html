@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Paradise - Pets</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+            color: #006064;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, #00838f, #00bcd4);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        nav {
+            background-color: #006064;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 10px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            display: block;
+        }
+        
+        nav a:hover {
+            background-color: #00838f;
+        }
+        
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .filter-section h2 {
+            text-align: center;
+            color: #00838f;
+            margin-bottom: 20px;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: #006064;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #00838f;
+            transform: translateY(-2px);
+        }
+        
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .pet-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .pet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .pet-image {
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .dog-bg {
+            background: linear-gradient(to bottom right, #ffcc80, #ffb74d);
+        }
+        
+        .cat-bg {
+            background: linear-gradient(to bottom right, #90caf9, #64b5f6);
+        }
+        
+        .bird-bg {
+            background: linear-gradient(to bottom right, #a5d6a7, #81c784);
+        }
+        
+        .fish-bg {
+            background: linear-gradient(to bottom right, #80deea, #4dd0e1);
+        }
+        
+        .reptile-bg {
+            background: linear-gradient(to bottom right, #c5e1a5, #aed581);
+        }
+        
+        .small-bg {
+            background: linear-gradient(to bottom right, #f8bbd0, #f48fb1);
+        }
+        
+        .pet-emoji {
+            font-size: 80px;
+        }
+        
+        .pet-info {
+            padding: 20px;
+        }
+        
+        .pet-info h3 {
+            color: #00838f;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .pet-info p {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .species {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #e0f2f1;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .trait {
+            padding: 3px 8px;
+            background-color: #bbdefb;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .dog-trait {
+            background-color: #ffecb3;
+        }
+        
+        .cat-trait {
+            background-color: #bbdefb;
+        }
+        
+        .bird-trait {
+            background-color: #c8e6c9;
+        }
+        
+        .fish-trait {
+            background-color: #b2ebf2;
+        }
+        
+        .reptile-trait {
+            background-color: #dcedc8;
+        }
+        
+        .small-trait {
+            background-color: #f8bbd0;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #006064;
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .no-pets-message {
+            text-align: center;
+            padding: 40px;
+            background-color: white;
+            border-radius: 10px;
+            grid-column: 1 / -1;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pets-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Our Furry & Feathered Friends</h1>
+            <nav>
+                <ul>
+                   <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="pets.html">Pets</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="socials.html">Social Media</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div class="filter-section">
+            <h2>Find Your Perfect Companion</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Pets</button>
+                <button class="filter-btn" data-filter="dog">Dogs</button>
+                <button class="filter-btn" data-filter="cat">Cats</button>
+                <button class="filter-btn" data-filter="bird">Birds</button>
+                <button class="filter-btn" data-filter="fish">Fish</button>
+                <button class="filter-btn" data-filter="reptile">Reptiles</button>
+                <button class="filter-btn" data-filter="small">Small Animals</button>
+            </div>
+        </div>
+        
+        <div class="pets-grid">
+            <!-- Dogs -->
+            <div class="pet-card" data-type="dog">
+                <div class="pet-image dog-bg">
+                    <span class="pet-emoji">🐶</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Buddy</h3>
+                    <span class="species">Golden Retriever</span>
+                    <p>Friendly and playful, Buddy loves everyone he meets. Great with kids and other pets.</p>
+                    <p>Age: 2 years</p>
+                    <div class="traits">
+                        <span class="trait dog-trait">Family Friendly</span>
+                        <span class="trait dog-trait">Active</span>
+                        <span class="trait dog-trait">Playful</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="dog">
+                <div class="pet-image dog-bg">
+                    <span class="pet-emoji">🐶</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Roxy</h3>
+                    <span class="species">Border Collie</span>
+                    <p>Highly intelligent and energetic, Roxy needs plenty of exercise and mental stimulation.</p>
+                    <p>Age: 4 years</p>
+                    <div class="traits">
+                        <span class="trait dog-trait">Intelligent</span>
+                        <span class="trait dog-trait">Energetic</span>
+                        <span class="trait dog-trait">Trainable</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="dog">
+                <div class="pet-image dog-bg">
+                    <span class="pet-emoji">🐶</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Max</h3>
+                    <span class="species">Siberian Husky</span>
+                    <p>Beautiful blue-eyed Max has lots of energy and loves to run. Needs an active family.</p>
+                    <p>Age: 3 years</p>
+                    <div class="traits">
+                        <span class="trait dog-trait">Energetic</span>
+                        <span class="trait dog-trait">Vocal</span>
+                        <span class="trait dog-trait">Independent</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="dog">
+                <div class="pet-image dog-bg">
+                    <span class="pet-emoji">🐶</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Daisy</h3>
+                    <span class="species">Dachshund</span>
+                    <p>Sweet and curious, Daisy loves to burrow and cuddle. Great for apartment living.</p>
+                    <p>Age: 5 years</p>
+                    <div class="traits">
+                        <span class="trait dog-trait">Curious</span>
+                        <span class="trait dog-trait">Affectionate</span>
+                        <span class="trait dog-trait">Adaptable</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cats -->
+            <div class="pet-card" data-type="cat">
+                <div class="pet-image cat-bg">
+                    <span class="pet-emoji">🐱</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Whiskers</h3>
+                    <span class="species">Siamese</span>
+                    <p>Elegant and curious, Whiskers enjoys exploring and cuddling on her own terms.</p>
+                    <p>Age: 3 years</p>
+                    <div class="traits">
+                        <span class="trait cat-trait">Curious</span>
+                        <span class="trait cat-trait">Vocal</span>
+                        <span class="trait cat-trait">Playful</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="cat">
+                <div class="pet-image cat-bg">
+                    <span class="pet-emoji">🐱</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Mittens</h3>
+                    <span class="species">Maine Coon</span>
+                    <p>Gentle giant with a fluffy coat. Mittens is as sweet as he is large.</p>
+                    <p>Age: 2 years</p>
+                    <div class="traits">
+                        <span class="trait cat-trait">Gentle</span>
+                        <span class="trait cat-trait">Friendly</span>
+                        <span class="trait cat-trait">Large</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="cat">
+                <div class="pet-image cat-bg">
+                    <span class="pet-emoji">🐱</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Luna</h3>
+                    <span class="species">Scottish Fold</span>
+                    <p>With her unique folded ears, Luna is as sweet as she is beautiful. Loves attention.</p>
+                    <p>Age: 1 year</p>
+                    <div class="traits">
+                        <span class="trait cat-trait">Sweet</span>
+                        <span class="trait cat-trait">Quiet</span>
+                        <span class="trait cat-trait">Affectionate</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="cat">
+                <div class="pet-image cat-bg">
+                    <span class="pet-emoji">🐱</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Simba</h3>
+                    <span class="species">Bengal</span>
+                    <p>Beautiful spotted coat with a wild appearance. Simba is active and needs space to play.</p>
+                    <p>Age: 2 years</p>
+                    <div class="traits">
+                        <span class="trait cat-trait">Active</span>
+                        <span class="trait cat-trait">Playful</span>
+                        <span class="trait cat-trait">Intelligent</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Birds -->
+            <div class="pet-card" data-type="bird">
+                <div class="pet-image bird-bg">
+                    <span class="pet-emoji">🐦</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Sunny</h3>
+                    <span class="species">Parakeet</span>
+                    <p>Bright and cheerful, Sunny loves to sing and can learn to mimic simple sounds.</p>
+                    <p>Age: 1 year</p>
+                    <div class="traits">
+                        <span class="trait bird-trait">Vocal</span>
+                        <span class="trait bird-trait">Social</span>
+                        <span class="trait bird-trait">Colorful</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="bird">
+                <div class="pet-image bird-bg">
+                    <span class="pet-emoji">🐦</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Coco</h3>
+                    <span class="species">Cockatiel</span>
+                    <p>Social and affectionate, Coco loves attention and can whistle several tunes.</p>
+                    <p>Age: 2 years</p>
+                    <div class="traits">
+                        <span class="trait bird-trait">Affectionate</span>
+                        <span class="trait bird-trait">Musical</span>
+                        <span class="trait bird-trait">Friendly</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="bird">
+                <div class="pet-image bird-bg">
+                    <span class="pet-emoji">🦜</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Rio</h3>
+                    <span class="species">Green-Cheeked Conure</span>
+                    <p>Playful and mischievous, Rio loves to be the center of attention. Can learn words and tricks.</p>
+                    <p>Age: 3 years</p>
+                    <div class="traits">
+                        <span class="trait bird-trait">Playful</span>
+                        <span class="trait bird-trait">Intelligent</span>
+                        <span class="trait bird-trait">Social</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="bird">
+                <div class="pet-image bird-bg">
+                    <span class="pet-emoji">🦜</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Kiwi</h3>
+                    <span class="species">Lovebird</span>
+                    <p>Tiny but full of personality, Kiwi forms strong bonds and loves to play with toys.</p>
+                    <p>Age: 1 year</p>
+                    <div class="traits">
+                        <span class="trait bird-trait">Small</span>
+                        <span class="trait bird-trait">Active</span>
+                        <span class="trait bird-trait">Bonding</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fish -->
+            <div class="pet-card" data-type="fish">
+                <div class="pet-image fish-bg">
+                    <span class="pet-emoji">🐠</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Bubbles</h3>
+                    <span class="species">Betta Fish</span>
+                    <p>Beautiful blue and red Betta with flowing fins. Prefers to live alone in his tank.</p>
+                    <p>Age: 6 months</p>
+                    <div class="traits">
+                        <span class="trait fish-trait">Colorful</span>
+                        <span class="trait fish-trait">Solitary</span>
+                        <span class="trait fish-trait">Hardy</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="fish">
+                <div class="pet-image fish-bg">
+                    <span class="pet-emoji">🐟</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Goldie</h3>
+                    <span class="species">Goldfish</span>
+                    <p>Classic orange goldfish that's perfect for beginners. Can grow quite large with proper care.</p>
+                    <p>Age: 1 year</p>
+                    <div class="traits">
+                        <span class="trait fish-trait">Beginner Friendly</span>
+                        <span class="trait fish-trait">Social</span>
+                        <span class="trait fish-trait">Long-Lived</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="fish">
+                <div class="pet-image fish-bg">
+                    <span class="pet-emoji">🐡</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Puffer</h3>
+                    <span class="species">Green Spotted Puffer</span>
+                    <p>Personable fish with unique appearance and behavior. Requires special care and diet.</p>
+                    <p>Age: 8 months</p>
+                    <div class="traits">
+                        <span class="trait fish-trait">Unique</span>
+                        <span class="trait fish-trait">Interactive</span>
+                        <span class="trait fish-trait">Special Diet</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reptiles -->
+            <div class="pet-card" data-type="reptile">
+                <div class="pet-image reptile-bg">
+                    <span class="pet-emoji">🦎</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Spike</h3>
+                    <span class="species">Bearded Dragon</span>
+                    <p>Docile and friendly lizard that enjoys handling. Requires specific heating and lighting.</p>
+                    <p>Age: 2 years</p>
+                    <div class="traits">
+                        <span class="trait reptile-trait">Docile</span>
+                        <span class="trait reptile-trait">Handlable</span>
+                        <span class="trait reptile-trait">Desert Species</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="reptile">
+                <div class="pet-image reptile-bg">
+                    <span class="pet-emoji">🐍</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Slither</h3>
+                    <span class="species">Corn Snake</span>
+                    <p>Beautiful orange and red snake with gentle temperament. Great beginner snake species.</p>
+                    <p>Age: 3 years</p>
+                    <div class="traits">
+                        <span class="trait reptile-trait">Gentle</span>
+                        <span class="trait reptile-trait">Beginner Friendly</span>
+                        <span class="trait reptile-trait">Nocturnal</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="reptile">
+                <div class="pet-image reptile-bg">
+                    <span class="pet-emoji">🐢</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Shelly</h3>
+                    <span class="species">Red-Eared Slider</span>
+                    <p>Aquatic turtle that needs both water and dry areas. Can live for several decades.</p>
+                    <p>Age: 5 years</p>
+                    <div class="traits">
+                        <span class="trait reptile-trait">Aquatic</span>
+                        <span class="trait reptile-trait">Long-Lived</span>
+                        <span class="trait reptile-trait">Sun Basker</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Small Animals -->
+            <div class="pet-card" data-type="small">
+                <div class="pet-image small-bg">
+                    <span class="pet-emoji">🐹</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Nibbles</h3>
+                    <span class="species">Syrian Hamster</span>
+                    <p>Nocturnal and solitary, Nibbles is fun to watch at night. Needs a large enclosure with toys.</p>
+                    <p>Age: 4 months</p>
+                    <div class="traits">
+                        <span class="trait small-trait">Nocturnal</span>
+                        <span class="trait small-trait">Solitary</span>
+                        <span class="trait small-trait">Active</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="small">
+                <div class="pet-image small-bg">
+                    <span class="pet-emoji">🐇</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Fluffy</h3>
+                    <span class="species">Netherland Dwarf Rabbit</span>
+                    <p>Tiny rabbit with big personality. Can be litter trained and enjoys exploring safely.</p>
+                    <p>Age: 1 year</p>
+                    <div class="traits">
+                        <span class="trait small-trait">Small</span>
+                        <span class="trait small-trait">Intelligent</span>
+                        <span class="trait small-trait">Social</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="small">
+                <div class="pet-image small-bg">
+                    <span class="pet-emoji">🐁</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Squeakers</h3>
+                    <span class="species">Fancy Mouse</span>
+                    <p>Social animals that do best in pairs or groups. Entertaining to watch and easy to care for.</p>
+                    <p>Age: 3 months</p>
+                    <div class="traits">
+                        <span class="trait small-trait">Social</span>
+                        <span class="trait small-trait">Active</span>
+                        <span class="trait small-trait">Small</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pet-card" data-type="small">
+                <div class="pet-image small-bg">
+                    <span class="pet-emoji">🐹</span>
+                </div>
+                <div class="pet-info">
+                    <h3>Chocolate</h3>
+                    <span class="species">Guinea Pig</span>
+                    <p>Social vocal animal that thrives with companionship. Requires vitamin C supplementation.</p>
+                    <p>Age: 6 months</p>
+                    <div class="traits">
+                        <span class="trait small-trait">Vocal</span>
+                        <span class="trait small-trait">Social</span>
+                        <span class="trait small-trait">Herbivore</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Pet Paradise. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const petCards = document.querySelectorAll('.pet-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filter = button.getAttribute('data-filter');
+                    
+                    let visiblePets = 0;
+                    
+                    petCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-type') === filter) {
+                            card.style.display = 'block';
+                            visiblePets++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show message if no pets match the filter
+                    let noPetsMessage = document.querySelector('.no-pets-message');
+                    if (visiblePets === 0) {
+                        if (!noPetsMessage) {
+                            noPetsMessage = document.createElement('div');
+                            noPetsMessage.className = 'no-pets-message';
+                            noPetsMessage.innerHTML = '<h3>No pets match this category at the moment.</h3><p>Please check back soon or browse our other pet categories!</p>';
+                            document.querySelector('.pets-grid').appendChild(noPetsMessage);
+                        }
+                    } else if (noPetsMessage) {
+                        noPetsMessage.remove();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
